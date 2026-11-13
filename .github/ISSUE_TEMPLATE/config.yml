@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Full guide
+    url: https://zozopeak.com/mcp
+    about: How to connect the server to Claude, ChatGPT, Cursor and VS Code.

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "zozopeak": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.zozopeak.com/mcp"]
+    }
+  }
+}

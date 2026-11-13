@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>find_coupons &amp; find_store_deals: ZoZoPeak MCP Tool Reference</title>
+  <meta name="description" content="Parameter reference and reply shapes for the two read-only tools of the ZoZoPeak Coupon MCP server: find_coupons for coupon codes and find_store_deals for deal links.">
+  <link rel="canonical" href="https://zozopeak.github.io/coupon-mcp-server/tools.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="find_coupons &amp; find_store_deals: ZoZoPeak MCP Tool Reference">
+  <meta property="og:description" content="Parameter reference and reply shapes for the two read-only tools of the ZoZoPeak Coupon MCP server: find_coupons for coupon codes and find_store_deals for deal links.">
+  <meta property="og:image" content="https://zozopeak.github.io/coupon-mcp-server/emblem-256.png">
+  <meta property="og:url" content="https://zozopeak.github.io/coupon-mcp-server/tools.html">
+  <link rel="icon" type="image/png" href="emblem-256.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <img src="emblem-256.png" alt="ZoZoPeak emblem" width="44" height="44">
+    <span class="brand">ZoZoPeak Coupon MCP Server</span>
+    <nav class="site">
+      <a href="index.html">Docs</a>
+      <a href="install.html">Install</a>
+      <a href="tools.html">Tools</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Tool Reference: <code>find_coupons</code> &amp; <code>find_store_deals</code></h1>
+    <p>The server exposes two read-only tools. Each works on one store per call: the assistant names a store, the tools look up what is listed for it in official store and affiliate-program feeds, and the result comes back as structured text your assistant can read out. Neither tool writes anything anywhere.</p>
+
+    <h2>Shared parameters</h2>
+    <div class="table-scroll">
+      <table>
+        <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Meaning</th></tr>
+        <tr><td><code>store</code></td><td>string</td><td>yes</td><td>The store to look up. Use the name shoppers actually use, for example "amazon" or "noon". Spelling matters.</td></tr>
+        <tr><td><code>country</code></td><td>string</td><td>no</td><td>A country or region name. When given, results are matched to that market.</td></tr>
+        <tr><td><code>limit</code></td><td>integer</td><td>no</td><td>The most rows to return. When omitted, the server picks a sensible count on its own.</td></tr>
+      </table>
+    </div>
+    <p>Both tools accept exactly these three parameters and no others.</p>
+
+    <h2><code>find_coupons</code></h2>
+    <p>Returns coupon codes for the named store. Codes are shown exactly as they appear in the feeds; each row also carries the offer title, the discount as stated by the feed, and a link that opens the offer at the store.</p>
+    <p>Example prompt: "Find coupon codes for Noon in the UAE." — this calls <code>find_coupons</code> with <code>store: "Noon"</code> and <code>country: "UAE"</code>. The reply lists rows of this shape:</p>
+    <pre><code>{
+  "store": "STORE NAME",
+  "code": "CODE123",
+  "title": "OFFER TITLE",
+  "discount": "XX% OFF",
+  "link": "a link to the offer at the store",
+  "last_seen": "DATE the feed listed this offer"
+}</code></pre>
+
+    <h2><code>find_store_deals</code></h2>
+    <p>Returns deal links for the named store: offers reachable without a code. Each row carries the offer title, the stated discount and the link.</p>
+    <p>Example prompt: "Find deal links for Amazon in the US." — this calls <code>find_store_deals</code> with <code>store: "Amazon"</code> and <code>country: "US"</code>. The reply lists rows of this shape:</p>
+    <pre><code>{
+  "store": "STORE NAME",
+  "title": "OFFER TITLE",
+  "discount": "XX% OFF",
+  "link": "a link to the offer at the store",
+  "last_seen": "DATE the feed listed this offer"
+}</code></pre>
+    <p>Every link in a reply opens over https. When a reply contains links, it also carries a short line noting that ZoZoPeak may earn a commission on them.</p>
+
+    <h2>Prompts that work well</h2>
+    <ul>
+      <li>"Find coupon codes for AliExpress."</li>
+      <li>"Find coupon codes for Noon in the UAE."</li>
+      <li>"Find deal links for Amazon in the US."</li>
+      <li>"Find coupons for Amazon and show the ones with the biggest stated saving."</li>
+    </ul>
+    <p>The tools take one store per call. For two stores, ask for them one after the other; your assistant will call the tool twice.</p>
+
+    <h2>Troubleshooting</h2>
+    <h3>Empty results for a store</h3>
+    <p>Check the spelling first — the tools match the name you give. Try the store's common short name, or drop the <code>country</code> parameter to widen the match. A store with nothing listed in the feeds right now returns no rows; that is a plain "no offers listed", not a failure.</p>
+    <h3>Results without codes</h3>
+    <p>Use <code>find_coupons</code> when you want codes and <code>find_store_deals</code> when you want links without codes. If a coupon row comes back with a discount but no code, the feed listed the offer without a code — the deal link is then the way in.</p>
+    <h3>Old dates in <code>last_seen</code></h3>
+    <p><code>last_seen</code> records when a feed listed the offer; it is a feed timestamp, not a statement that anyone used the code. Treat a much older date as a hint to prefer rows seen more recently.</p>
+
+    <h2>More reading</h2>
+    <ul>
+      <li><a href="https://zozopeak.com/mcp">ZoZoPeak coupon MCP server</a> — the full guide on the main site</li>
+      <li><a href="https://zozopeak.com/privacy#mcp">Privacy</a> — how MCP requests are handled</li>
+    </ul>
+  </main>
+  <footer class="site">
+    <p>Documentation for the hosted ZoZoPeak Coupon MCP server. First time here? Start on the <a href="index.html">quick start</a>.</p>
+  </footer>
+</body>
+</html>

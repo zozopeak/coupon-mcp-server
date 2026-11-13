@@ -1,0 +1,114 @@
+/* ZoZoPeak Coupon MCP Server docs.
+   Dark background, gold accent sampled from the emblem, mobile-first.
+   No web fonts, no analytics, no outside requests. */
+
+:root {
+  --bg: #14151c;
+  --surface: #1d1f2a;
+  --border: #2d2f3d;
+  --text: #e9e7e0;
+  --muted: #a8a69d;
+  --gold: #e0b04a;
+  --gold-soft: #f0d08a;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a { color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:visited { color: var(--gold-soft); }
+
+code, pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9em;
+}
+
+code { padding: 0.1em 0.35em; }
+
+pre { padding: 0.8em 1em; overflow-x: auto; }
+
+pre code { padding: 0; border: 0; background: transparent; font-size: 1em; }
+
+h1, h2, h3 { color: var(--gold); line-height: 1.25; }
+h1 { font-size: 1.55rem; margin: 0.2rem 0 1rem; }
+h2 { font-size: 1.2rem; margin: 2rem 0 0.6rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+h3 { font-size: 1.05rem; margin: 1.4rem 0 0.4rem; color: var(--gold-soft); }
+
+p, ul, ol, table { margin: 0.6rem 0 1rem; }
+
+ul, ol { padding-left: 1.4rem; }
+
+li + li { margin-top: 0.3rem; }
+
+header.site {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+header.site img { width: 44px; height: 44px; vertical-align: middle; }
+
+header.site .brand { font-weight: 700; color: var(--gold-soft); }
+
+nav.site { margin-left: auto; display: flex; gap: 0.9rem; flex-wrap: wrap; }
+nav.site a { text-decoration: none; }
+nav.site a:hover { text-decoration: underline; }
+
+main { padding: 1rem; max-width: 100%; }
+
+footer.site {
+  margin-top: 2.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+table { border-collapse: collapse; width: 100%; }
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: var(--surface); color: var(--gold-soft); }
+
+.table-scroll { overflow-x: auto; }
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  margin: 1rem 0;
+}
+
+.emblem-row { text-align: center; margin: 0.5rem 0 1rem; }
+.emblem-row img { width: 96px; height: 96px; }
+
+.muted { color: var(--muted); }
+
+@media (min-width: 720px) {
+  main { max-width: 56rem; margin: 0 auto; padding: 2rem 1rem; }
+  header.site { padding: 1rem 2rem; }
+  footer.site { padding: 1rem 2rem; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.35rem; }
+}

@@ -1,0 +1,29 @@
+name: Request a store
+description: Ask for a store to be added to the coupon server.
+title: "[Store request]: "
+labels: ["store-request"]
+body:
+  - type: input
+    id: store-name
+    attributes:
+      label: Store name
+      description: The store you want coupon codes and deals for.
+      placeholder: Example Store
+    validations:
+      required: true
+  - type: input
+    id: store-url
+    attributes:
+      label: Store URL
+      description: The web address of the store, including the scheme.
+      placeholder: web address of the store
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: The country or region you shop from.
+      placeholder: Country or region
+    validations:
+      required: false

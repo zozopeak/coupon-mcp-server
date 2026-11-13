@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect the ZoZoPeak Coupon MCP to Claude, ChatGPT, Cursor &amp; VS Code</title>
+  <meta name="description" content="Step-by-step setup for the ZoZoPeak Coupon MCP server in Claude, Claude Code, ChatGPT, Cursor, VS Code and stdio-only clients, with copy-ready configuration snippets.">
+  <link rel="canonical" href="https://zozopeak.github.io/coupon-mcp-server/install.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Connect the ZoZoPeak Coupon MCP to Claude, ChatGPT, Cursor &amp; VS Code">
+  <meta property="og:description" content="Step-by-step setup for the ZoZoPeak Coupon MCP server in Claude, Claude Code, ChatGPT, Cursor, VS Code and stdio-only clients, with copy-ready configuration snippets.">
+  <meta property="og:image" content="https://zozopeak.github.io/coupon-mcp-server/emblem-256.png">
+  <meta property="og:url" content="https://zozopeak.github.io/coupon-mcp-server/install.html">
+  <link rel="icon" type="image/png" href="emblem-256.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <img src="emblem-256.png" alt="ZoZoPeak emblem" width="44" height="44">
+    <span class="brand">ZoZoPeak Coupon MCP Server</span>
+    <nav class="site">
+      <a href="index.html">Docs</a>
+      <a href="install.html">Install</a>
+      <a href="tools.html">Tools</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Connect the ZoZoPeak Coupon MCP</h1>
+    <p>Everything your client needs is the server URL. It speaks Streamable HTTP, needs no authentication and is free to use. Wherever a step says "the server URL", paste this:</p>
+    <pre><code>https://mcp.zozopeak.com/mcp</code></pre>
+
+    <h2>Claude (web and desktop)</h2>
+    <ol>
+      <li>Open <strong>Settings → Connectors</strong>.</li>
+      <li>Choose <strong>Add custom connector</strong>.</li>
+      <li>Name it <strong>ZoZoPeak</strong> and paste the server URL.</li>
+      <li>Pick the choice that connects without signing in, then save.</li>
+      <li>Start a chat, open the tools or connectors picker and switch ZoZoPeak on.</li>
+      <li>Ask for coupons by store, for example: "Find coupon codes for Noon."</li>
+    </ol>
+
+    <h2>Claude Code</h2>
+    <p>Run this once in your terminal; it registers the server for you:</p>
+    <pre><code>claude mcp add --transport http zozopeak https://mcp.zozopeak.com/mcp</code></pre>
+
+    <h2>ChatGPT</h2>
+    <ol>
+      <li>Open <strong>Settings → Connectors</strong> and start creating a custom connector.</li>
+      <li>Give it a name, paste the server URL as the MCP server address, and choose the option with no authentication.</li>
+      <li>In a chat, enable the connector from the tools or connectors picker.</li>
+      <li>Ask for coupons or deals by store name.</li>
+    </ol>
+
+    <h2>Cursor</h2>
+    <p>Two ways, both end at the same place:</p>
+    <ol>
+      <li>Open <strong>Cursor Settings → Tools &amp; MCP</strong>, add a new MCP server, give it the name <strong>zozopeak</strong> and paste the server URL; or</li>
+      <li>edit <code>mcp.json</code> and add the block below. The copy-ready file is <a href="https://github.com/zozopeak/coupon-mcp-server/blob/main/examples/cursor-mcp.json">examples/cursor-mcp.json</a> in this repository.</li>
+    </ol>
+    <pre><code>{
+  "mcpServers": {
+    "zozopeak": {
+      "url": "https://mcp.zozopeak.com/mcp"
+    }
+  }
+}</code></pre>
+
+    <h2>VS Code</h2>
+    <ol>
+      <li>Open the Command Palette and run <strong>MCP: Add Server</strong>.</li>
+      <li>Choose <strong>HTTP</strong> as the type, name it <strong>zozopeak</strong>, and paste the server URL.</li>
+      <li>Or save the block below as <code>.vscode/mcp.json</code> in your workspace (the copy-ready file is <a href="https://github.com/zozopeak/coupon-mcp-server/blob/main/examples/vscode-mcp.json">examples/vscode-mcp.json</a>).</li>
+    </ol>
+    <pre><code>{
+  "servers": {
+    "zozopeak": {
+      "type": "http",
+      "url": "https://mcp.zozopeak.com/mcp"
+    }
+  }
+}</code></pre>
+
+    <h2>Other clients (stdio only)</h2>
+    <p>Clients that only launch local programs can reach the server through the <code>mcp-remote</code> bridge. Add this to your client's configuration (copy-ready file: <a href="https://github.com/zozopeak/coupon-mcp-server/blob/main/examples/stdio-mcp-remote.json">examples/stdio-mcp-remote.json</a>):</p>
+    <pre><code>{
+  "mcpServers": {
+    "zozopeak": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.zozopeak.com/mcp"]
+    }
+  }
+}</code></pre>
+    <p>Node.js must be on your PATH for this variant, since <code>npx</code> runs the bridge locally.</p>
+
+    <h2>Troubleshooting</h2>
+    <h3>The tools never appear</h3>
+    <p>Confirm the connector is switched on for the chat you are in — many clients enable connectors per chat, not globally. Restart the client after editing a configuration file, then ask the assistant to list its available tools.</p>
+    <h3>The connection fails</h3>
+    <p>Check the URL character by character; it must be exactly the server URL shown at the top. When your client asks how to sign in, pick the no-authentication option — the server does not use accounts. Network filters that block unknown domains can also stop the connection; try a different network if one is available.</p>
+    <h3>Free plans</h3>
+    <p>Entry-level plans of some assistants allow only a small number of custom connectors. If yours is full, remove an unused connector first and then add ZoZoPeak.</p>
+
+    <h2>More reading</h2>
+    <ul>
+      <li><a href="https://zozopeak.com/mcp">ZoZoPeak coupon MCP server</a> — the full guide on the main site</li>
+      <li><a href="https://zozopeak.com/privacy#mcp">Privacy</a> — how MCP requests are handled</li>
+    </ul>
+  </main>
+  <footer class="site">
+    <p>Documentation for the hosted ZoZoPeak Coupon MCP server. Next stop: the <a href="tools.html">tool reference</a>.</p>
+  </footer>
+</body>
+</html>

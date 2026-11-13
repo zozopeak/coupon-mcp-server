@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZoZoPeak Coupon MCP Server: Docs &amp; Quick Start</title>
+  <meta name="description" content="Quick start for the free ZoZoPeak Coupon MCP server: point Claude, ChatGPT, Cursor or VS Code at one URL to pull verified coupon codes and current store deals.">
+  <link rel="canonical" href="https://zozopeak.github.io/coupon-mcp-server/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ZoZoPeak Coupon MCP Server: Docs &amp; Quick Start">
+  <meta property="og:description" content="Quick start for the free ZoZoPeak Coupon MCP server: point Claude, ChatGPT, Cursor or VS Code at one URL to pull verified coupon codes and current store deals.">
+  <meta property="og:image" content="https://zozopeak.github.io/coupon-mcp-server/emblem-256.png">
+  <meta property="og:url" content="https://zozopeak.github.io/coupon-mcp-server/">
+  <link rel="icon" type="image/png" href="emblem-256.png">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ZoZoPeak Coupon MCP Server",
+    "url": "https://zozopeak.com/mcp",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ZoZoPeak",
+      "url": "https://zozopeak.com/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site">
+    <img src="emblem-256.png" alt="ZoZoPeak emblem" width="44" height="44">
+    <span class="brand">ZoZoPeak Coupon MCP Server</span>
+    <nav class="site">
+      <a href="index.html">Docs</a>
+      <a href="install.html">Install</a>
+      <a href="tools.html">Tools</a>
+    </nav>
+  </header>
+  <main>
+    <div class="emblem-row">
+      <img src="emblem-256.png" alt="Gold dolphin over a gold coin, the ZoZoPeak emblem" width="96" height="96">
+    </div>
+    <h1>ZoZoPeak Coupon MCP Server</h1>
+    <p>A free remote MCP server that gives AI assistants coupon codes and current deals for online stores. There is nothing to install: your assistant connects to one server URL over Streamable HTTP, with no API key and no account. Offers are gathered from official store and affiliate-program feeds.</p>
+
+    <h2>The one thing you need</h2>
+    <p>The server URL you paste into any MCP client:</p>
+    <pre><code>https://mcp.zozopeak.com/mcp</code></pre>
+
+    <h2>Quick start</h2>
+    <ol>
+      <li>Open the connector or MCP settings of your assistant (Claude, ChatGPT, Cursor, VS Code, or another MCP client).</li>
+      <li>Add a custom remote connector and paste the server URL above. Choose the option with no sign-in.</li>
+      <li>Enable the connector in a chat and ask for coupons by store name.</li>
+    </ol>
+    <p>Client-by-client walkthroughs with copy-ready configuration live on the <a href="install.html">install page</a>.</p>
+
+    <h2>What your assistant can ask for</h2>
+    <p>Two read-only tools come with the server. See the <a href="tools.html">tool reference</a> for parameters and reply shapes.</p>
+    <div class="table-scroll">
+      <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td><code>find_coupons</code></td><td>Coupon codes for the store you name, with titles and stated discounts.</td></tr>
+        <tr><td><code>find_store_deals</code></td><td>Deal links for the store you name, with titles and stated discounts.</td></tr>
+      </table>
+    </div>
+
+    <h2>Try these prompts</h2>
+    <ul>
+      <li>"Find coupon codes for AliExpress."</li>
+      <li>"Find coupon codes for Noon in the UAE."</li>
+      <li>"Find deal links for Amazon in the US."</li>
+      <li>"Show me current deals for SHEIN."</li>
+      <li>"Find coupons for Amazon and show the ones with the biggest stated saving."</li>
+    </ul>
+
+    <h2>Elsewhere on ZoZoPeak</h2>
+    <ul>
+      <li><a href="https://zozopeak.com/mcp">ZoZoPeak coupon MCP server</a></li>
+      <li><a href="https://zozopeak.com/">ZoZoPeak</a></li>
+      <li><a href="https://zozopeak.com/hot-deals/">Hot deals</a></li>
+      <li><a href="https://zozopeak.com/compare/">Product comparisons</a></li>
+      <li><a href="https://zozopeak.com/privacy#mcp">Privacy</a></li>
+    </ul>
+  </main>
+  <footer class="site">
+    <p>Documentation for the hosted ZoZoPeak Coupon MCP server. Free to use, no account needed. See the <a href="install.html">install guide</a> or the <a href="tools.html">tool reference</a>.</p>
+  </footer>
+</body>
+</html>
