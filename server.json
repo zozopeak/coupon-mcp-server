@@ -3,8 +3,9 @@
   "name": "com.zozopeak/coupons",
   "title": "ZoZoPeak: Verified Coupons & Deals MCP",
   "description": "Fetch verified store coupon codes and promo deals via official feeds. Free, no API key required.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "websiteUrl": "https://zozopeak.com/mcp",
+  "repository": { "url": "https://github.com/zozopeak/coupon-mcp-server", "source": "github" },
   "icons": [
     { "src": "https://zozopeak.com/assets/mcp/brand/emblem-256.png", "mimeType": "image/png", "sizes": ["256x256"] }
   ],
